@@ -24,7 +24,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.forntoh.web_service.api.ApiManager
 import dev.forntoh.web_service.api.ApiManagerImpl
-import dev.forntoh.web_service.datasources.VehicleNetworkDataSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

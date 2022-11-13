@@ -42,10 +42,10 @@ interface MainApiService {
     @GET("/discover/movie")
     suspend fun loadMovies(
         @Query("page") page: Int,
-        @Query("sort_by") sortBy: String = "popularity.desc",
-        @Query("include_adult") includeAdult: Boolean = false,
-        @Query("include_video") includeVideo: Boolean = false,
-        @Query("release_date.lte") releasedBeforeDate: String? = null,
-        @Query("year.lte") year: String? = null,
+        @Query("sort_by") sortBy: String,
+        @Query("include_adult") includeAdult: Boolean,
+        @Query("include_video") includeVideo: Boolean,
+        @Query("release_date.lte") releasedBeforeDate: String?,
+        @Query("year.lte") year: String?,
     ): Response<MoviesDTO>
 }
