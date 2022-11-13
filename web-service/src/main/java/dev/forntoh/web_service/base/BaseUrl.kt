@@ -20,4 +20,7 @@ object BaseUrl {
 
     @JvmStatic
     val defaultBaseUrl: String = "https://api.themoviedb.org/3"
+
+    @JvmStatic
+    val imageBaseUrl: String = "https://image.tmdb.org/t/p/original"
 }
