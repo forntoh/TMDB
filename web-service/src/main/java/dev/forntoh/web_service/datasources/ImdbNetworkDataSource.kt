@@ -37,10 +37,20 @@ class ImdbNetworkDataSource @Inject constructor(
     private val _moviesFlow: MutableStateFlow<MoviesDTO?> = MutableStateFlow(null)
     val moviesFlow = _moviesFlow as StateFlow<MoviesDTO?>
 
+    private val _searchResultsFlow: MutableStateFlow<MoviesDTO?> = MutableStateFlow(null)
+    val searchResultsFlow = _searchResultsFlow as StateFlow<MoviesDTO?>
+
     suspend fun fetchMovieDetails(id: Int): MovieDTO? {
         val fetchedData = apiManager.mainApi.loadMovieDetails(id)
         return if (fetchedData.isSuccessful) fetchedData.body()
         else null
+    }
+
+    suspend fun searchMovies(query: String) {
+        val fetchedData = apiManager.mainApi.searchMovie(query)
+        if (fetchedData.isSuccessful && fetchedData.body() != null) with(fetchedData.body()!!) {
+            _searchResultsFlow.emit(this)
+        }
     }
 
     suspend fun fetchMovies(filter: DiscoverMoviesFilter) {
