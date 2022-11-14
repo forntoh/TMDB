@@ -1,6 +1,7 @@
 package dev.forntoh.tmdb.ui
 
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,7 +44,9 @@ fun NavGraph(
                         navController.navigate("${MainDestinations.MOVIE_DETAILS_ROUTE}/${id}")
                     }
                 },
-                modifier = modifier.fillMaxHeight()
+                modifier = modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
             )
         }
         composable(
@@ -59,6 +62,8 @@ fun NavGraph(
                 movieId = movieId,
                 movieDetailsViewModel = hiltViewModel(backStackEntry),
                 modifier = modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
             )
         }
     }
