@@ -19,8 +19,8 @@ package dev.forntoh.web_service.datasources
 import dev.forntoh.common.entities.DiscoverMoviesFilter
 import dev.forntoh.web_service.api.ApiManager
 import dev.forntoh.web_service.dto.MoviesDTO
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 /**
@@ -45,7 +45,19 @@ class ImdbNetworkDataSource @Inject constructor(
             filter.releasedBeforeDate,
             filter.year
         )
-        if (fetchedData.isSuccessful) _moviesFlow.emit(fetchedData.body())
+        if (fetchedData.isSuccessful && fetchedData.body() != null) with(fetchedData.body()!!) {
+            // Get previous data
+            val prev = _moviesFlow.value?.results?.toMutableList() ?: mutableListOf()
+
+            // Append new data
+            prev.addAll(results)
+
+            // Mutate result with new data
+            results = prev.toList()
+
+            // Emit mutation
+            _moviesFlow.emit(this)
+        }
     }
 
 }
