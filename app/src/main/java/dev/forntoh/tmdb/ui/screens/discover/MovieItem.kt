@@ -1,17 +1,20 @@
 package dev.forntoh.tmdb.ui.screens.discover
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import dev.forntoh.common.entities.Movie
 import dev.forntoh.tmdb.utils.OnBottomReached
 
@@ -44,11 +47,46 @@ fun MovieItem(
     onMovieSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.clickable {
-        onMovieSelected(movie.id)
-    }) {
-        Text(text = movie.title)
-        Text(text = movie.releaseDate)
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable {
+                onMovieSelected(movie.id)
+            }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            AsyncImage(
+                model = movie.poster,
+                contentDescription = null,
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(text = movie.title, style = MaterialTheme.typography.h6, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(text = movie.releaseDate, style = MaterialTheme.typography.caption)
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = movie.longDescription,
+                    style = MaterialTheme.typography.caption,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "${movie.rating}",
+                    style = MaterialTheme.typography.caption,
+                    color = Color.Yellow
+                )
+            }
+        }
     }
 }
 
@@ -61,7 +99,7 @@ fun MovieItemPreview() {
             title = "Terminator 3",
             language = "English",
             releaseDate = "2022-11-10",
-            longDescription = "Description"
+            longDescription = "Description",
         ),
         onMovieSelected = { }
     )

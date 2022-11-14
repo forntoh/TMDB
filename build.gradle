@@ -1,12 +1,13 @@
 buildscript {
     ext {
-        compose_ui_version = '1.4.0-alpha01'
-        hilt_version = '2.44'
+        compose_ui_version = '1.4.0-alpha02'
+        hilt_version = '2.44.1'
         kotlin_version = '1.7.10'
         ok_http_Version = '5.0.0-alpha.2'
         retrofit_version = '2.9.0'
         lifecycle_version = '2.6.0-alpha03'
         accompanist_version = '0.27.0'
+        coil_compose_version = '2.2.2'
         hilt_android_version = '1.0.0'
         material_design_version = '1.7.0'
         navigation_compose_version = '2.5.3'

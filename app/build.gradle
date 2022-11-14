@@ -65,8 +65,12 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
     implementation 'androidx.activity:activity-compose:1.6.1'
 
+
     // Accompanist for compose
     implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
+
+    // Coil
+    implementation "io.coil-kt:coil-compose:$coil_compose_version"
 
     // Hilt Dependency Injection
     implementation "com.google.dagger:hilt-android:$hilt_version"
