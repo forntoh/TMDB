@@ -39,7 +39,7 @@ interface MainApiService {
      *
      * @return list of all the movies
      */
-    @GET("/discover/movie")
+    @GET("/3/discover/movie")
     suspend fun loadMovies(
         @Query("page") page: Int,
         @Query("sort_by") sortBy: String,
