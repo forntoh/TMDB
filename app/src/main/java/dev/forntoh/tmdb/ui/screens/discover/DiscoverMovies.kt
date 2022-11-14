@@ -18,6 +18,7 @@ fun DiscoverMovies(
     DiscoverMovies(
         moviesCollection = moviesCollection,
         onMovieSelected = onMovieSelected,
+        loadMore = discoverMoviesViewModel::nextPage,
         modifier = modifier
     )
 }
@@ -26,11 +27,13 @@ fun DiscoverMovies(
 fun DiscoverMovies(
     moviesCollection: List<Movie>,
     onMovieSelected: (Int) -> Unit,
+    loadMore: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     MovieList(
         moviesCollection = moviesCollection,
         onMovieSelect = onMovieSelected,
-        modifier = modifier
+        modifier = modifier,
+        loadMore = loadMore
     )
 }
