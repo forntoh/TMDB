@@ -37,6 +37,18 @@ class MoviesRepoImpl @Inject constructor(
 
     private val totalPages = MutableStateFlow(1)
 
+    override val searchResults: Flow<List<Movie>> = imdbNetworkDataSource.searchResultsFlow
+        .map { dto ->
+            dto?.let {
+                it.results.map { movie -> movie.toModel() }
+            } ?: emptyList()
+        }.flowOn(Dispatchers.IO)
+
+    override suspend fun searchMovies(query: String) {
+        val q = query.trim()
+        if (q.length > 2) imdbNetworkDataSource.searchMovies(query)
+    }
+
     override val movies: Flow<List<Movie>> = imdbNetworkDataSource.moviesFlow
         .map { dto ->
             dto?.let {
