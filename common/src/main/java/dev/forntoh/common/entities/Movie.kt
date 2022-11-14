@@ -8,7 +8,7 @@ data class Movie(
     val title: String,
     val poster: String?,
     val backdrop: String?,
-    val genres: List<Genre>,
+    val genres: List<Genre>?,
     val language: String,
     val longDescription: String,
     val shortDescription: String?,

@@ -13,7 +13,7 @@ data class MovieDTO(
 
     @SerializedName("backdrop_path") val backdropPath: String?,
 
-    val genres: List<Genre> = emptyList(),
+    val genres: List<Genre>?,
 
     @SerializedName("original_language") val originalLanguage: String,
 
