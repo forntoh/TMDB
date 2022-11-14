@@ -46,6 +46,6 @@ interface MainApiService {
         @Query("include_adult") includeAdult: Boolean,
         @Query("include_video") includeVideo: Boolean,
         @Query("release_date.lte") releasedBeforeDate: String?,
-        @Query("year.lte") year: String?,
+        @Query("year") year: Int?,
     ): Response<MoviesDTO>
 }

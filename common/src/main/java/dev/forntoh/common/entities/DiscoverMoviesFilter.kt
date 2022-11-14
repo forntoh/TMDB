@@ -6,5 +6,5 @@ data class DiscoverMoviesFilter(
     val includeAdult: Boolean = false,
     val includeVideo: Boolean = false,
     val releasedBeforeDate: String? = null,
-    val year: String? = null,
+    val year: Int? = null,
 )
