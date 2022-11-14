@@ -1,11 +1,15 @@
 package dev.forntoh.tmdb.ui.screens.discover
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import dev.forntoh.common.entities.Movie
+import dev.forntoh.tmdb.ui.components.AutoCompleteTextField
 
 @Composable
 fun DiscoverMovies(
@@ -36,5 +40,15 @@ fun DiscoverMovies(
         onMovieSelect = onMovieSelected,
         modifier = modifier,
         loadMore = loadMore
+    )
+
+    AutoCompleteTextField(
+        itemList = listOf("asds", "uiuiwui"),
+        onQuery = { },
+        onClearResults = { },
+        modifier = Modifier
+            .fillMaxWidth()
+            .statusBarsPadding()
+            .padding(16.dp)
     )
 }
