@@ -3,10 +3,20 @@ package dev.forntoh.tmdb.utils
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.*
 
+/**
+ * Compose LazyListState to load more data when last item in list is visible
+ *
+ * @param buffer trigger distance from bottom
+ * @param loadMore function to invoke
+ * */
 @Composable
 fun LazyListState.OnBottomReached(
+    buffer: Int = 0,
     loadMore: () -> Unit
 ) {
+
+    require(buffer >= 0) { "buffer cannot be negative, but was $buffer" }
+
     // state object which tells us if we should load more
     val shouldLoadMore = remember {
         derivedStateOf {
@@ -18,8 +28,8 @@ fun LazyListState.OnBottomReached(
                 // return false here if loadMore should not be invoked if the list is empty
                 return@derivedStateOf true
 
-            // Check if last visible item is the last item in the list
-            lastVisibleItem.index == layoutInfo.totalItemsCount - 1
+            // Subtract buffer from the total items
+            lastVisibleItem.index >= layoutInfo.totalItemsCount - 1 - buffer
         }
     }
 
