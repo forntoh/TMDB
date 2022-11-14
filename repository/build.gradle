@@ -24,6 +24,7 @@ plugins {
 android {
     namespace 'dev.forntoh.repository'
     compileSdkVersion 33
+    buildToolsVersion "33.0.0"
 
     buildTypes {
         release {

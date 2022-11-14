@@ -8,6 +8,7 @@ plugins {
 android {
     namespace 'dev.forntoh.tmdb'
     compileSdk 33
+    buildToolsVersion "33.0.0"
 
     defaultConfig {
         applicationId "dev.forntoh.tmdb"

@@ -24,6 +24,7 @@ plugins {
 android {
     namespace 'dev.forntoh.common'
     compileSdk 33
+    buildToolsVersion "33.0.0"
 
     defaultConfig {
         minSdkVersion 23
