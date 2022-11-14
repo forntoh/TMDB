@@ -17,8 +17,15 @@
 package dev.forntoh.tmdb
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+
 
 @HiltAndroidApp
-class App : Application()
+class App : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+    }
+}
