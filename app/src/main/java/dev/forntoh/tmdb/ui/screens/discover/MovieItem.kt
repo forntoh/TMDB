@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.forntoh.common.entities.Movie
 
@@ -24,7 +25,7 @@ fun MovieList(
         modifier = modifier
     ) {
         items(moviesCollection) { movie ->
-            MovieItem(movie = movie, onMovieSelect = onMovieSelect)
+            MovieItem(movie = movie, onMovieSelected = onMovieSelect)
         }
     }
 }
@@ -32,13 +33,28 @@ fun MovieList(
 @Composable
 fun MovieItem(
     movie: Movie,
-    onMovieSelect: (Int) -> Unit,
+    onMovieSelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.clickable {
-        onMovieSelect(movie.id)
+        onMovieSelected(movie.id)
     }) {
         Text(text = movie.title)
         Text(text = movie.releaseDate)
     }
+}
+
+@Preview
+@Composable
+fun MovieItemPreview() {
+    MovieItem(
+        movie = Movie(
+            id = 1,
+            title = "Terminator 3",
+            language = "English",
+            releaseDate = "2022-11-10",
+            longDescription = "Description"
+        ),
+        onMovieSelected = { }
+    )
 }
