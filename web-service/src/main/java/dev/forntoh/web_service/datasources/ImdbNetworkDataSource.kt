@@ -18,6 +18,7 @@ package dev.forntoh.web_service.datasources
 
 import dev.forntoh.common.entities.DiscoverMoviesFilter
 import dev.forntoh.web_service.api.ApiManager
+import dev.forntoh.web_service.dto.MovieDTO
 import dev.forntoh.web_service.dto.MoviesDTO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +36,12 @@ class ImdbNetworkDataSource @Inject constructor(
 
     private val _moviesFlow: MutableStateFlow<MoviesDTO?> = MutableStateFlow(null)
     val moviesFlow = _moviesFlow as StateFlow<MoviesDTO?>
+
+    suspend fun fetchMovieDetails(id: Int): MovieDTO? {
+        val fetchedData = apiManager.mainApi.loadMovieDetails(id)
+        return if (fetchedData.isSuccessful) fetchedData.body()
+        else null
+    }
 
     suspend fun fetchMovies(filter: DiscoverMoviesFilter) {
         val fetchedData = apiManager.mainApi.loadMovies(

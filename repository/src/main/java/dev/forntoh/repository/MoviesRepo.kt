@@ -31,4 +31,6 @@ abstract class MoviesRepo {
     abstract val movies: Flow<List<Movie>>
 
     abstract suspend fun updateFilters(newFilters: DiscoverMoviesFilter): DiscoverMoviesFilter
+
+    abstract suspend fun loadMovieDetails(id: Int): Movie?
 }

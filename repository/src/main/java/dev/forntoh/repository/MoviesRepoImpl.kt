@@ -48,6 +48,9 @@ class MoviesRepoImpl @Inject constructor(
     override suspend fun updateFilters(newFilters: DiscoverMoviesFilter) = newFilters.apply {
         if (page > totalPages.value) page = totalPages.value
         else if (page <= 0) page = 1
-        else  imdbNetworkDataSource.fetchMovies(this)
+        else imdbNetworkDataSource.fetchMovies(this)
     }
+
+    override suspend fun loadMovieDetails(id: Int) = imdbNetworkDataSource.fetchMovieDetails(id)?.toModel()
+
 }
