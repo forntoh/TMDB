@@ -30,5 +30,5 @@ abstract class MoviesRepo {
      */
     abstract val movies: Flow<List<Movie>>
 
-    abstract suspend fun updateFilters(newFilters: DiscoverMoviesFilter)
+    abstract suspend fun updateFilters(newFilters: DiscoverMoviesFilter): DiscoverMoviesFilter
 }
