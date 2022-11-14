@@ -1,4 +1,4 @@
-package dev.forntoh.tmdb.ui
+package dev.forntoh.tmdb.ui.screens.discover
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class MoviesViewModel @Inject constructor(
+class DiscoverMoviesViewModel @Inject constructor(
     private val moviesRepo: MoviesRepo
 ) : ViewModel() {
 
