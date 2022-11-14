@@ -55,4 +55,9 @@ interface MainApiService {
     suspend fun loadMovieDetails(
         @Path("movieId") movieId: Int,
     ): Response<MovieDTO>
+
+    @GET("/3/search/movie")
+    suspend fun searchMovie(
+        @Query("query") query: String,
+    ): Response<MoviesDTO>
 }
