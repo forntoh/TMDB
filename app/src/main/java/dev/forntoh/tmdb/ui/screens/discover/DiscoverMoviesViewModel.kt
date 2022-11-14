@@ -29,8 +29,6 @@ class DiscoverMoviesViewModel @Inject constructor(
         )
     )
 
-    init { updateFilters(filter) }
-
     /**
      * LiveData for the Movies
      */
@@ -38,10 +36,6 @@ class DiscoverMoviesViewModel @Inject constructor(
 
     fun nextPage() = with(filter) {
         updateFilters(this.copy(page = page + 1))
-    }
-
-    fun previousPage() = with(filter) {
-        updateFilters(this.copy(page = page - 1))
     }
 
     private fun updateFilters(newFilter: DiscoverMoviesFilter) {
