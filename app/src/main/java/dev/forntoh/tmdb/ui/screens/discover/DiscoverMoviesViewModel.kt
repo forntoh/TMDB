@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.forntoh.common.entities.DiscoverMoviesFilter
 import dev.forntoh.repository.MoviesRepo
 import dev.forntoh.tmdb.utils.getToDateString
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+@HiltViewModel
 class DiscoverMoviesViewModel @Inject constructor(
     private val moviesRepo: MoviesRepo
 ) : ViewModel() {
