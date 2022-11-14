@@ -16,9 +16,11 @@
 
 package dev.forntoh.web_service.api
 
+import dev.forntoh.web_service.dto.MovieDTO
 import dev.forntoh.web_service.dto.MoviesDTO
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -48,4 +50,9 @@ interface MainApiService {
         @Query("release_date.lte") releasedBeforeDate: String?,
         @Query("year") year: Int?,
     ): Response<MoviesDTO>
+
+    @GET("/3/movie/{movieId}")
+    suspend fun loadMovieDetails(
+        @Path("movieId") movieId: Int,
+    ): Response<MovieDTO>
 }
