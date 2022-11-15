@@ -2,61 +2,54 @@ package dev.forntoh.tmdb.ui.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
 
 @Composable
-fun AutoCompleteTextField(
+fun <T> AutoCompleteTextField(
+    placeHolder: String,
+    predictions: List<T>,
     modifier: Modifier = Modifier,
-    initialText: String = "",
-    itemList: List<String>,
-    onQuery: (String) -> Unit,
-    onClearResults: () -> Unit,
+    onQueryChanged: (String) -> Unit = {},
+    onDoneActionClick: () -> Unit = {},
+    onClearClick: () -> Unit = {},
+    onItemClick: (T) -> Unit = {},
+    itemContent: @Composable (T) -> Unit = {}
 ) {
-    var field by remember {
-        mutableStateOf(TextFieldValue(text = initialText))
-    }
 
-    LaunchedEffect(key1 = field.text) {
-        if (field.text.isNotBlank()) {
-            delay(1000L)
-            onQuery(field.text.trim())
-        }
-    }
-    LazyColumn(modifier = modifier.animateContentSize()) {
+    val lazyListState = rememberLazyListState()
+
+    LazyColumn(
+        state = lazyListState,
+        modifier = modifier.animateContentSize()
+    ) {
         item {
-            TextField(
-                value = field,
-                onValueChange = {
-                    field = it
-                    onClearResults()
-                },
-                maxLines = 1,
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(text = "Search")
-                }
+            SearchTextField(
+                placeHolder = placeHolder,
+                onQueryChanged = onQueryChanged,
+                onDoneActionClick = onDoneActionClick,
+                onClearClick = onClearClick
             )
         }
-        if (itemList.isNotEmpty() && field.text.isNotBlank()) {
-            items(itemList) { item ->
-                Text(
-                    text = item,
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .clickable(onClick = {
-                            field = TextFieldValue(item)
-                        })
-                )
+        if (predictions.isNotEmpty()) {
+            items(predictions) { prediction ->
+                Row(
+                    Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                        .clickable {
+                            onItemClick(prediction)
+                        }
+                ) {
+                    itemContent(prediction)
+                }
             }
         }
     }
