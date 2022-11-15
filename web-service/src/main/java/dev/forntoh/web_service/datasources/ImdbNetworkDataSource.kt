@@ -28,7 +28,7 @@ import javax.inject.Inject
  * [ImdbNetworkDataSource] is the data source for the IMDB Cloud API.
  * It fetches the movie list from the web service and updates the flow.
  *
- * @property apiManager is the api manager to fetch the vehicle list.
+ * @property apiManager is the api manager to fetch the movie list.
  */
 class ImdbNetworkDataSource @Inject constructor(
     private val apiManager: ApiManager,
@@ -47,7 +47,7 @@ class ImdbNetworkDataSource @Inject constructor(
     }
 
     suspend fun clearResults() {
-        _searchResultsFlow.emit(_moviesFlow.value?.copy(results = emptyList()))
+        _searchResultsFlow.emit(_searchResultsFlow.value?.copy(results = emptyList()))
     }
 
     suspend fun searchMovies(query: String) {
