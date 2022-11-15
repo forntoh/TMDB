@@ -34,6 +34,17 @@ class DiscoverMoviesViewModel @Inject constructor(
      */
     val movies = moviesRepo.movies.asLiveData()
 
+    /**
+     * LiveData for Movies Search Results
+     */
+    val searchResults = moviesRepo.searchResults.asLiveData()
+
+    fun searchMovies(query: String) {
+        viewModelScope.launch {
+            moviesRepo.searchMovies(query)
+        }
+    }
+
     fun nextPage() = with(filter) {
         updateFilters(this.copy(page = page + 1))
     }
