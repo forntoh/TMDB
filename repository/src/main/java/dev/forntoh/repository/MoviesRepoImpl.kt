@@ -40,7 +40,9 @@ class MoviesRepoImpl @Inject constructor(
     override val searchResults: Flow<List<Movie>> = imdbNetworkDataSource.searchResultsFlow
         .map { dto ->
             dto?.let {
-                it.results.map { movie -> movie.toModel() }
+                it.results
+                    .filter { movieDto -> movieDto.posterPath != null }
+                    .map { movie -> movie.toModel() }
             } ?: emptyList()
         }.flowOn(Dispatchers.IO)
 
