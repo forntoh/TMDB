@@ -46,6 +46,10 @@ class ImdbNetworkDataSource @Inject constructor(
         else null
     }
 
+    suspend fun clearResults() {
+        _searchResultsFlow.emit(_moviesFlow.value?.copy(results = emptyList()))
+    }
+
     suspend fun searchMovies(query: String) {
         val fetchedData = apiManager.mainApi.searchMovie(query)
         if (fetchedData.isSuccessful && fetchedData.body() != null) with(fetchedData.body()!!) {
