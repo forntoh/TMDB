@@ -33,6 +33,7 @@ class BaseInterceptor @Inject constructor() : Interceptor {
         val newUrl = originalUrl
             .newBuilder()
             .addQueryParameter("language", Locale.getDefault().toLanguageTag())
+            .addQueryParameter("api_key", /* TODO: Please Insert your api key here*/ "")
             .build()
 
         val request = originalRequest
