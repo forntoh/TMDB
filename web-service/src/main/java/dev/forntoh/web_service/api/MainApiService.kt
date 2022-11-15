@@ -51,11 +51,25 @@ interface MainApiService {
         @Query("year") year: Int?,
     ): Response<MoviesDTO>
 
+    /**
+     * Fetch Movie details from api
+     *
+     * @param movieId the Id of the movie
+     *
+     * @return [MovieDTO]
+     * */
     @GET("/3/movie/{movieId}")
     suspend fun loadMovieDetails(
         @Path("movieId") movieId: Int,
     ): Response<MovieDTO>
 
+    /**
+     * Search Movie on api
+     *
+     * @param query text to search
+     *
+     * @return [MoviesDTO] List of matching results
+     * */
     @GET("/3/search/movie")
     suspend fun searchMovie(
         @Query("query") query: String,

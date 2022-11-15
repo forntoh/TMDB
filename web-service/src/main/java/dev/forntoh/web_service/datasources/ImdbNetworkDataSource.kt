@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 /**
  * [ImdbNetworkDataSource] is the data source for the IMDB Cloud API.
- * It fetches the vehicle list from the web service and updates the flow.
+ * It fetches the movie list from the web service and updates the flow.
  *
  * @property apiManager is the api manager to fetch the vehicle list.
  */
