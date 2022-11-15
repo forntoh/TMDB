@@ -47,6 +47,7 @@ class MoviesRepoImpl @Inject constructor(
     override suspend fun searchMovies(query: String) {
         val q = query.trim()
         if (q.length > 2) imdbNetworkDataSource.searchMovies(query)
+        else if (q.isEmpty()) imdbNetworkDataSource.clearResults()
     }
 
     override val movies: Flow<List<Movie>> = imdbNetworkDataSource.moviesFlow
