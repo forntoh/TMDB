@@ -43,7 +43,7 @@ fun MovieList(
         }
     }
 
-    listState.OnBottomReached(buffer = 2, loadMore)
+    listState.OnBottomReached(buffer = 5, loadMore)
 }
 
 @Composable
