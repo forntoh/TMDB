@@ -35,6 +35,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+            buildConfigField "String", "IMAGES_BASE_URL", IMAGES_BASE_URL
+            buildConfigField "String", "TMDB_API_KEY", TMDB_API_KEY
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
