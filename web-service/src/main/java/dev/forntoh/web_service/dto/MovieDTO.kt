@@ -5,7 +5,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import dev.forntoh.common.entities.Genre
 import dev.forntoh.common.entities.Movie
-import dev.forntoh.web_service.base.BaseUrl
+import dev.forntoh.web_service.BuildConfig
 
 @Keep
 data class MovieDTO(
@@ -40,8 +40,8 @@ data class MovieDTO(
 fun MovieDTO.toModel(): Movie = Movie(
     id = id,
     title = title,
-    poster = "${BaseUrl.imageBaseUrl}$posterPath",
-    backdrop = "${BaseUrl.imageBaseUrl}$backdropPath",
+    poster = "${BuildConfig.IMAGES_BASE_URL}$posterPath",
+    backdrop = "${BuildConfig.IMAGES_BASE_URL}$backdropPath",
     genres = genres,
     language = originalLanguage,
     longDescription = overview,

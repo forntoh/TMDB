@@ -16,14 +16,14 @@
 
 package dev.forntoh.web_service.di
 
-import dev.forntoh.web_service.base.BaseUrl
-import dev.forntoh.web_service.interceptors.BaseInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.forntoh.web_service.BuildConfig
 import dev.forntoh.web_service.api.ApiManager
 import dev.forntoh.web_service.api.ApiManagerImpl
+import dev.forntoh.web_service.interceptors.BaseInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -64,7 +64,7 @@ object NetworkModule {
 
     @Provides
     fun provideRetrofitBuilder(): Retrofit.Builder = Retrofit.Builder()
-        .baseUrl(BaseUrl.defaultBaseUrl)
+        .baseUrl(BuildConfig.API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
 
     /**

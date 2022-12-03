@@ -16,6 +16,7 @@
 
 package dev.forntoh.web_service.interceptors
 
+import dev.forntoh.web_service.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
@@ -33,7 +34,7 @@ class BaseInterceptor @Inject constructor() : Interceptor {
         val newUrl = originalUrl
             .newBuilder()
             .addQueryParameter("language", Locale.getDefault().toLanguageTag())
-            .addQueryParameter("api_key", /* TODO: Please Insert your api key here*/ "")
+            .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
             .build()
 
         val request = originalRequest
