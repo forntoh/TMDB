@@ -17,6 +17,7 @@
 package dev.forntoh.web_service.datasources
 
 import dev.forntoh.common.entities.DiscoverMoviesFilter
+import dev.forntoh.common.runOnIoThread
 import dev.forntoh.web_service.api.ApiManager
 import dev.forntoh.web_service.dto.MovieDTO
 import dev.forntoh.web_service.dto.MoviesDTO
@@ -40,9 +41,9 @@ class ImdbNetworkDataSource @Inject constructor(
     private val _searchResultsFlow: MutableStateFlow<MoviesDTO?> = MutableStateFlow(null)
     val searchResultsFlow = _searchResultsFlow as StateFlow<MoviesDTO?>
 
-    suspend fun fetchMovieDetails(id: Int): MovieDTO? {
+    suspend fun fetchMovieDetails(id: Int): MovieDTO? = runOnIoThread {
         val fetchedData = apiManager.mainApi.loadMovieDetails(id)
-        return if (fetchedData.isSuccessful) fetchedData.body()
+        return@runOnIoThread if (fetchedData.isSuccessful) fetchedData.body()
         else null
     }
 
@@ -50,14 +51,14 @@ class ImdbNetworkDataSource @Inject constructor(
         _searchResultsFlow.emit(_searchResultsFlow.value?.copy(results = emptyList()))
     }
 
-    suspend fun searchMovies(query: String) {
+    suspend fun searchMovies(query: String) = runOnIoThread {
         val fetchedData = apiManager.mainApi.searchMovie(query)
         if (fetchedData.isSuccessful && fetchedData.body() != null) with(fetchedData.body()!!) {
             _searchResultsFlow.emit(this)
         }
     }
 
-    suspend fun fetchMovies(filter: DiscoverMoviesFilter) {
+    suspend fun fetchMovies(filter: DiscoverMoviesFilter) = runOnIoThread {
         val fetchedData = apiManager.mainApi.loadMovies(
             filter.page,
             filter.sortBy,
